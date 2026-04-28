@@ -6,9 +6,9 @@ interface Props {
 const { waitlistUrl } = Astro.props;
 ---
 
-<section class="py-20 sm:py-24">
+<section class="section-shell py-20 sm:py-24">
   <div class="mx-auto w-full max-w-6xl px-6 sm:px-8">
-    <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+    <div class="gold-ring rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 sm:p-10">
       <h2 class="max-w-3xl text-3xl font-bold leading-tight sm:text-5xl">
         Join the waitlist before doors open.
       </h2>
@@ -24,7 +24,7 @@ const { waitlistUrl } = Astro.props;
           Join the waitlist
         </a>
       </div>
-      <div class="mt-10 rounded-md border border-white/10 bg-black/40 p-5 sm:p-7">
+      <div class="mt-10 rounded-md border border-white/12 bg-black/45 p-5 sm:p-7">
         <p class="text-sm font-semibold uppercase tracking-[0.15em] text-[#C9A44A]">Waitlist form</p>
         <form id="waitlist-form" class="mt-6">
           <div class="space-y-6" data-step="1">
@@ -35,7 +35,7 @@ const { waitlistUrl } = Astro.props;
                 id="fullName"
                 name="fullName"
                 required
-                class="w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
+                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
                 placeholder="Your name"
               />
             </div>
@@ -46,7 +46,7 @@ const { waitlistUrl } = Astro.props;
                 name="email"
                 type="email"
                 required
-                class="w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
+                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
                 placeholder="you@company.com"
               />
             </div>
@@ -60,7 +60,7 @@ const { waitlistUrl } = Astro.props;
                 id="channels"
                 name="channels"
                 required
-                class="w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
+                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
                 placeholder="Meta, Google, TikTok..."
               />
             </div>
@@ -72,7 +72,7 @@ const { waitlistUrl } = Astro.props;
                 type="number"
                 min="1"
                 required
-                class="w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
+                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
                 placeholder="5000"
               />
             </div>
@@ -87,7 +87,7 @@ const { waitlistUrl } = Astro.props;
                 name="biggestBlocker"
                 rows="4"
                 required
-                class="w-full rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
+                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
                 placeholder="What is costing you the most right now?"
               ></textarea>
             </div>
