@@ -1,0 +1,455 @@
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #000; }
+
+  #stage {
+    width: 390px;
+    height: 693px;
+    margin: 0 auto;
+    position: relative;
+    background: #0a0a0a;
+    overflow: hidden;
+    border-radius: 12px;
+    font-family: 'Georgia', serif;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    padding: 40px 32px;
+  }
+  .slide.active { opacity: 1; }
+
+  /* Slide 1 — dark logo brand */
+  #s1 { background: #0a0a0a; }
+  #s1 img { width: 260px; margin-bottom: 24px; }
+  #s1 .tag {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #c9a44a;
+    text-transform: uppercase;
+  }
+
+  /* Slide 2 — pain hook */
+  #s2 { background: #0f0f0f; }
+  #s2 .big {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    font-family: 'Georgia', serif;
+  }
+  #s2 .big span { color: #c9a44a; }
+  #s2 .sub {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* Slide 3 — light infographic */
+  #s3 { background: #faf9f6; padding: 32px 28px; }
+  #s3 img { width: 100%; border-radius: 8px; }
+
+  /* Slide 4 — how it works */
+  #s4 { background: #faf9f6; padding: 32px 24px; }
+  #s4 img { width: 100%; border-radius: 8px; }
+
+  /* Slide 5 — you get access */
+  #s5 { background: #0f0f0f; padding: 32px 24px; }
+  #s5 img { width: 100%; border-radius: 8px; }
+
+  /* Slide 6 — divide cost */
+  #s6 { background: #faf9f6; padding: 32px 24px; }
+  #s6 img { width: 100%; border-radius: 8px; }
+
+  /* Slide 7 — CTA */
+  #s7 { background: #0a0a0a; }
+  #s7 .logo { width: 180px; margin-bottom: 28px; }
+  #s7 .line1 {
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #c9a44a;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  #s7 .cta {
+    font-size: 26px;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 28px;
+  }
+  #s7 .cta span { color: #c9a44a; }
+  #s7 .pill {
+    background: #c9a44a;
+    color: #0a0a0a;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 40px;
+  }
+  #s7 .note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Progress bar */
+  #progress {
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 3px;
+    background: #c9a44a;
+    width: 0%;
+    transition: width linear;
+    z-index: 99;
+  }
+
+  /* Slide counter */
+  #counter {
+    position: absolute;
+    top: 16px; right: 16px;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 1px;
+    z-index: 99;
+  }
+
+  /* Controls */
+  #controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 0 4px;
+  }
+  #controls button {
+    background: transparent;
+    border: 0.5px solid #444;
+    color: #ccc;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  #controls button:hover { border-color: #c9a44a; color: #c9a44a; }
+
+  #dot-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 10px;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #333;
+    transition: background 0.3s;
+  }
+  .dot.on { background: #c9a44a; }
+
+  .outer {
+    background: #111;
+    padding: 16px 0 20px;
+    border-radius: 16px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+</style>
+
+<div class="outer">
+  <div id="stage">
+    <div id="counter">1 / 7</div>
+    <div id="progress"></div>
+
+    <!-- Slide 1: Brand intro -->
+    <div class="slide active" id="s1">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextdoor_logo.svg/1200px-Nextdoor_logo.svg.png" alt="" style="display:none">
+      <svg width="220" height="80" viewBox="0 0 220 80">
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#c9a44a" stroke-width="2.5"/>
+        <polyline points="16,35 24,25 32,32 44,18" fill="none" stroke="#c9a44a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="42" y1="10" x2="50" y2="18" stroke="#c9a44a" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="62" y="28" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#fff">GROWTH</text>
+        <text x="62" y="52" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#c9a44a">ROOM</text>
+        <text x="62" y="70" font-family="Arial,sans-serif" font-size="10" fill="#888" letter-spacing="3">WEEKLY MASTERMIND</text>
+      </svg>
+      <div class="tag" style="margin-top:24px;">Expert help. Real strategies. Real growth.</div>
+    </div>
+
+    <!-- Slide 2: Pain hook -->
+    <div class="slide" id="s2">
+      <div class="big">Spending on ads.<br><span>No results?</span></div>
+      <div class="sub">Most entrepreneurs run their ads completely alone — with no expert to ask when things go wrong.</div>
+    </div>
+
+    <!-- Slide 3: Light infographic (spending but not converting) -->
+    <div class="slide" id="s3">
+      <svg width="330" height="560" viewBox="0 0 330 560" style="border-radius:8px">
+        <rect width="330" height="560" fill="#faf9f6" rx="8"/>
+        <!-- Logo -->
+        <circle cx="40" cy="38" r="18" fill="none" stroke="#c9a44a" stroke-width="2"/>
+        <polyline points="30,42 36,34 42,39 52,28" fill="none" stroke="#c9a44a" stroke-width="2" stroke-linecap="round"/>
+        <text x="68" y="34" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#1a1a2e">GROWTH</text>
+        <text x="68" y="50" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#c9a44a">ROOM</text>
+        <text x="68" y="62" font-family="Arial,sans-serif" font-size="7" fill="#888" letter-spacing="2">WEEKLY MASTERMIND</text>
+        <!-- Tagline box -->
+        <rect x="20" y="85" width="290" height="52" rx="6" fill="none" stroke="#c9a44a" stroke-width="1"/>
+        <text x="165" y="107" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888" letter-spacing="1">FOR ENTREPRENEURS WHO RUN ADS, TRACKING</text>
+        <text x="165" y="120" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888" letter-spacing="1">&amp; GROWTH SYSTEMS — AND WANT TO</text>
+        <text x="165" y="133" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#c9a44a" letter-spacing="1" font-weight="700">TURN SPEND INTO REAL GROWTH.</text>
+        <!-- 3 pillars -->
+        <text x="55" y="180" text-anchor="middle" font-size="22" fill="#c9a44a">$</text>
+        <circle cx="55" cy="165" r="20" fill="none" stroke="#c9a44a" stroke-width="1.5"/>
+        <text x="55" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">SPENDING</text>
+        <text x="55" y="223" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">BUT NOT CONVERTING?</text>
+        <text x="55" y="237" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#c9a44a">LET'S FIND OUT WHY.</text>
+
+        <circle cx="165" cy="165" r="20" fill="none" stroke="#c9a44a" stroke-width="1.5"/>
+        <text x="165" y="172" text-anchor="middle" font-size="16" fill="#c9a44a">⊙</text>
+        <text x="165" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">FIX TRACKING.</text>
+        <text x="165" y="223" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">FIND LEAKS.</text>
+        <text x="165" y="237" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#c9a44a">RECOVER WHAT YOU PAY FOR.</text>
+
+        <circle cx="275" cy="165" r="20" fill="none" stroke="#c9a44a" stroke-width="1.5"/>
+        <text x="275" y="172" text-anchor="middle" font-size="16" fill="#c9a44a">↑</text>
+        <text x="275" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">BETTER DECISIONS.</text>
+        <text x="275" y="223" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">BETTER SYSTEMS.</text>
+        <text x="275" y="237" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#c9a44a">SCALE WHAT WORKS.</text>
+
+        <!-- Bottom bar -->
+        <rect x="20" y="270" width="290" height="44" rx="6" fill="none" stroke="#c9a44a" stroke-width="1"/>
+        <rect x="20" y="270" width="96" height="44" rx="0" fill="none"/>
+        <text x="68" y="296" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">WEEKLY SESSIONS.</text>
+        <line x1="116" y1="278" x2="116" y2="306" stroke="#c9a44a" stroke-width="0.5"/>
+        <text x="165" y="296" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">REAL ACCOUNTS.</text>
+        <line x1="214" y1="278" x2="214" y2="306" stroke="#c9a44a" stroke-width="0.5"/>
+        <text x="265" y="296" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#1a1a2e">REAL ANSWERS.</text>
+      </svg>
+    </div>
+
+    <!-- Slide 4: How it works -->
+    <div class="slide" id="s4">
+      <svg width="330" height="400" viewBox="0 0 330 400" style="border-radius:8px">
+        <rect width="330" height="400" fill="#faf9f6" rx="8"/>
+        <text x="165" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#888" letter-spacing="2">HOW IT WORKS (WEEKLY)</text>
+        <!-- Step boxes -->
+        <rect x="15" y="60" width="65" height="80" rx="6" fill="none" stroke="#c9a44a" stroke-width="1"/>
+        <text x="47" y="92" text-anchor="middle" font-size="18" fill="#c9a44a">📅</text>
+        <text x="47" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#1a1a2e">WEEKLY</text>
+        <text x="47" y="122" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#1a1a2e">MASTERMIND</text>
+        <text x="47" y="135" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#888">Live group call</text>
+
+        <text x="88" y="102" text-anchor="middle" font-size="14" fill="#c9a44a">→</text>
+
+        <rect x="97" y="60" width="65" height="80" rx="6" fill="none" stroke="#c9a44a" stroke-width="1"/>
+        <text x="129" y="92" text-anchor="middle" font-size="18" fill="#c9a44a">💬</text>
+        <text x="129" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#1a1a2e">SHARE REAL</text>
+        <text x="129" y="122" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#1a1a2e">CHALLENGES</text>
+        <text x="129" y="135" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#888">Real feedback</text>
+
+        <text x="170" y="102" text-anchor="middle" font-size="14" fill="#c9a44a">→</text>
+
+        <rect x="179" y="60" width="65" height="80" rx="6" fill="none" stroke="#c9a44a" stroke-width="1"/>
+        <text x="211" y="92" text-anchor="middle" font-size="18" fill="#c9a44a">💡</text>
+        <text x="211" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#1a1a2e">GET EXPERT</text>
+        <text x="211" y="122" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#1a1a2e">SOLUTIONS</text>
+        <text x="211" y="135" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#888">Clear strategies</text>
+
+        <text x="252" y="102" text-anchor="middle" font-size="14" fill="#c9a44a">→</text>
+
+        <rect x="261" y="60" width="54" height="80" rx="6" fill="#c9a44a"/>
+        <text x="288" y="92" text-anchor="middle" font-size="18" fill="#0a0a0a">📈</text>
+        <text x="288" y="110" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#0a0a0a">TAKE</text>
+        <text x="288" y="122" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#0a0a0a">ACTION</text>
+        <text x="288" y="135" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="#2a1a00">See results</text>
+
+        <!-- Context / Clarity -->
+        <rect x="15" y="170" width="140" height="80" rx="6" fill="#1a1a2e"/>
+        <text x="85" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="16" font-weight="700" fill="#fff">YOU BRING</text>
+        <text x="85" y="218" text-anchor="middle" font-family="Georgia,serif" font-size="16" font-weight="700" fill="#fff">THE CONTEXT.</text>
+        <text x="85" y="240" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888">Your account. Your problem.</text>
+
+        <rect x="175" y="170" width="140" height="80" rx="6" fill="#c9a44a"/>
+        <text x="245" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="16" font-weight="700" fill="#0a0a0a">WE BRING</text>
+        <text x="245" y="218" text-anchor="middle" font-family="Georgia,serif" font-size="16" font-weight="700" fill="#0a0a0a">THE CLARITY.</text>
+        <text x="245" y="240" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#2a1a00">Expert answers. Live.</text>
+      </svg>
+    </div>
+
+    <!-- Slide 5: Divide cost -->
+    <div class="slide" id="s5">
+      <svg width="330" height="480" viewBox="0 0 330 480">
+        <rect width="330" height="480" fill="#0f0f0f" rx="8"/>
+        <text x="165" y="40" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#888" letter-spacing="2">DIVIDE THE COST. MULTIPLY THE VALUE.</text>
+
+        <!-- Left: Traditional -->
+        <rect x="15" y="60" width="138" height="200" rx="6" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <text x="84" y="88" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888" letter-spacing="1">TRADITIONAL</text>
+        <text x="84" y="104" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888" letter-spacing="1">CONSULTING</text>
+        <text x="84" y="138" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="700" fill="#e24a4a">$150K+</text>
+        <text x="84" y="158" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#e24a4a">/year</text>
+        <text x="44" y="190" font-family="Arial,sans-serif" font-size="9" fill="#555">✕  Very high cost</text>
+        <text x="44" y="207" font-family="Arial,sans-serif" font-size="9" fill="#555">✕  Limited availability</text>
+        <text x="44" y="224" font-family="Arial,sans-serif" font-size="9" fill="#555">✕  One perspective</text>
+        <text x="44" y="241" font-family="Arial,sans-serif" font-size="9" fill="#555">✕  Slow progress</text>
+
+        <!-- VS -->
+        <text x="165" y="168" text-anchor="middle" font-family="Georgia,serif" font-size="18" font-weight="700" fill="#c9a44a">VS</text>
+
+        <!-- Right: Growth Room -->
+        <rect x="177" y="60" width="138" height="200" rx="6" fill="#c9a44a"/>
+        <text x="246" y="88" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#2a1a00" letter-spacing="1">GROWTH ROOM</text>
+        <text x="246" y="120" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-weight="700" fill="#0a0a0a">Fraction</text>
+        <text x="246" y="140" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-weight="700" fill="#0a0a0a">of the cost</text>
+        <text x="206" y="172" font-family="Arial,sans-serif" font-size="9" fill="#2a1a00">✓  Weekly expert access</text>
+        <text x="206" y="189" font-family="Arial,sans-serif" font-size="9" fill="#2a1a00">✓  Real-time solutions</text>
+        <text x="206" y="206" font-family="Arial,sans-serif" font-size="9" fill="#2a1a00">✓  Multiple perspectives</text>
+        <text x="206" y="223" font-family="Arial,sans-serif" font-size="9" fill="#2a1a00">✓  Faster growth together</text>
+
+        <!-- Bottom 3 -->
+        <rect x="15" y="285" width="88" height="70" rx="6" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <text x="59" y="316" text-anchor="middle" font-size="18" fill="#c9a44a">🔓</text>
+        <text x="59" y="342" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#c9a44a">MORE ACCESS</text>
+
+        <rect x="121" y="285" width="88" height="70" rx="6" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <text x="165" y="316" text-anchor="middle" font-size="18" fill="#c9a44a">$</text>
+        <text x="165" y="342" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#c9a44a">LESS COST</text>
+
+        <rect x="227" y="285" width="88" height="70" rx="6" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+        <text x="271" y="316" text-anchor="middle" font-size="18" fill="#c9a44a">📈</text>
+        <text x="271" y="342" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#c9a44a">REAL GROWTH</text>
+
+        <text x="165" y="400" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#444" letter-spacing="2">WEEKLY MASTERMIND. REAL ACCOUNTS. EXPERT HELP. REAL GROWTH.</text>
+      </svg>
+    </div>
+
+    <!-- Slide 6: Access list -->
+    <div class="slide" id="s6">
+      <svg width="330" height="440" viewBox="0 0 330 440">
+        <rect width="330" height="440" fill="#111" rx="8"/>
+        <!-- Mug icon area -->
+        <rect x="15" y="20" width="300" height="60" rx="6" fill="#1a1a1a"/>
+        <text x="165" y="45" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-weight="700" fill="#fff">YOU GET ACCESS TO:</text>
+        <text x="165" y="68" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#888">Everything you need. Nothing you don't.</text>
+
+        <!-- checklist -->
+        <rect x="30" y="98" width="270" height="36" rx="4" fill="#1a1a1a"/>
+        <text x="55" y="121" font-family="Arial,sans-serif" font-size="11" fill="#c9a44a">✓</text>
+        <text x="72" y="121" font-family="Arial,sans-serif" font-size="11" fill="#fff">Proven frameworks that actually work</text>
+
+        <rect x="30" y="142" width="270" height="36" rx="4" fill="#1a1a1a"/>
+        <text x="55" y="165" font-family="Arial,sans-serif" font-size="11" fill="#c9a44a">✓</text>
+        <text x="72" y="165" font-family="Arial,sans-serif" font-size="11" fill="#fff">Fresh insights from real accounts</text>
+
+        <rect x="30" y="186" width="270" height="36" rx="4" fill="#1a1a1a"/>
+        <text x="55" y="209" font-family="Arial,sans-serif" font-size="11" fill="#c9a44a">✓</text>
+        <text x="72" y="209" font-family="Arial,sans-serif" font-size="11" fill="#fff">Ad strategies that convert</text>
+
+        <rect x="30" y="230" width="270" height="36" rx="4" fill="#1a1a1a"/>
+        <text x="55" y="253" font-family="Arial,sans-serif" font-size="11" fill="#c9a44a">✓</text>
+        <text x="72" y="253" font-family="Arial,sans-serif" font-size="11" fill="#fff">Tracking fixes that unlock growth</text>
+
+        <rect x="30" y="274" width="270" height="36" rx="4" fill="#1a1a1a"/>
+        <text x="55" y="297" font-family="Arial,sans-serif" font-size="11" fill="#c9a44a">✓</text>
+        <text x="72" y="297" font-family="Arial,sans-serif" font-size="11" fill="#fff">Creative &amp; offer ideas that stand out</text>
+
+        <rect x="30" y="318" width="270" height="36" rx="4" fill="#c9a44a"/>
+        <text x="55" y="341" font-family="Arial,sans-serif" font-size="11" fill="#0a0a0a">✓</text>
+        <text x="72" y="341" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#0a0a0a">A community of ambitious founders</text>
+      </svg>
+    </div>
+
+    <!-- Slide 7: CTA -->
+    <div class="slide" id="s7">
+      <svg width="220" height="80" viewBox="0 0 220 80" style="margin-bottom:20px">
+        <circle cx="30" cy="30" r="22" fill="none" stroke="#c9a44a" stroke-width="2.5"/>
+        <polyline points="16,35 24,25 32,32 44,18" fill="none" stroke="#c9a44a" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="42" y1="10" x2="50" y2="18" stroke="#c9a44a" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="62" y="28" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#fff">GROWTH</text>
+        <text x="62" y="52" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#c9a44a">ROOM</text>
+        <text x="62" y="70" font-family="Arial,sans-serif" font-size="10" fill="#888" letter-spacing="3">WEEKLY MASTERMIND</text>
+      </svg>
+      <div class="line1">Spots are strictly limited</div>
+      <div class="cta">Stop figuring it out<br>alone.<br><span>Join the waitlist now.</span></div>
+      <div class="pill">JOIN WAITLIST</div>
+      <div class="note">No commitment · Weekly expert access</div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button onclick="prev()">← Prev</button>
+    <button onclick="togglePlay()" id="playbtn">⏸ Pause</button>
+    <button onclick="next()">Next →</button>
+  </div>
+  <div id="dot-row">
+    <div class="dot on" id="d0"></div>
+    <div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+    <div class="dot" id="d4"></div>
+    <div class="dot" id="d5"></div>
+    <div class="dot" id="d6"></div>
+  </div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('progress');
+const playbtn = document.getElementById('playbtn');
+const durations = [2000, 2500, 3000, 3000, 3000, 3000, 3000];
+let cur = 0, timer = null, barTimer = null, playing = true;
+
+function show(n) {
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('on');
+  cur = (n + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('on');
+  counter.textContent = (cur + 1) + ' / ' + slides.length;
+  animateBar(durations[cur]);
+}
+
+function animateBar(ms) {
+  clearTimeout(barTimer);
+  bar.style.transition = 'none';
+  bar.style.width = '0%';
+  setTimeout(() => {
+    bar.style.transition = 'width ' + ms + 'ms linear';
+    bar.style.width = '100%';
+  }, 30);
+}
+
+function startAuto() {
+  clearTimeout(timer);
+  timer = setTimeout(() => { if(playing) { show(cur + 1); startAuto(); } }, durations[cur]);
+}
+
+function next() { show(cur + 1); if(playing) startAuto(); }
+function prev() { show(cur - 1); if(playing) startAuto(); }
+
+function togglePlay() {
+  playing = !playing;
+  playbtn.textContent = playing ? '⏸ Pause' : '▶ Play';
+  if(playing) { animateBar(durations[cur]); startAuto(); }
+  else { clearTimeout(timer); bar.style.transition = 'none'; }
+}
+
+animateBar(durations[0]);
+startAuto();
+</script>
