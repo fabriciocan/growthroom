@@ -1,0 +1,38 @@
+---
+interface Props {
+  waitlistUrl: string;
+  formUrl: string;
+}
+
+const { waitlistUrl, formUrl } = Astro.props;
+---
+
+<section class="py-20 sm:py-24">
+  <div class="mx-auto w-full max-w-6xl px-6 sm:px-8">
+    <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6 sm:p-10">
+      <h2 class="max-w-3xl text-3xl font-bold leading-tight sm:text-5xl">
+        Join the waitlist before doors open.
+      </h2>
+      <p class="mt-4 max-w-2xl text-lg text-zinc-300">
+        If you are already spending on paid traffic and want consistent, expert-level direction, this is for
+        you.
+      </p>
+      <div class="mt-8">
+        <a
+          href={waitlistUrl}
+          class="inline-flex items-center justify-center rounded-md bg-[#C9A44A] px-8 py-3 text-base font-semibold text-black transition hover:bg-[#d9b65f]"
+        >
+          Join the waitlist
+        </a>
+      </div>
+      <div class="mt-10 overflow-hidden rounded-md border border-white/10">
+        <iframe
+          src={formUrl}
+          title="Growth Room Waitlist"
+          loading="lazy"
+          class="h-[500px] w-full bg-black"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
