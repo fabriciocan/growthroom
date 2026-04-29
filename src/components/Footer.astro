@@ -1,0 +1,50 @@
+---
+const logoUrl = "/img/growth%20room%201%20white.png";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/8 bg-black/30">
+  <div class="mx-auto max-w-6xl px-6 py-14 sm:px-8">
+
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Brand -->
+      <div class="lg:col-span-2">
+        <img src={logoUrl} alt="Growth Room" class="h-10 w-auto" />
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-zinc-500">
+          A private weekly mastermind for entrepreneurs running paid ads who want expert guidance
+          without the six-figure price tag.
+        </p>
+        <p class="mt-5 text-sm text-zinc-600">
+          <a href="https://instagram.com/thegrowthroomhq" target="_blank" rel="noopener noreferrer"
+             class="text-zinc-500 hover:text-[#C9A44A] transition font-medium">
+            @thegrowthroomhq
+          </a>
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-zinc-600">Quick links</p>
+        <ul class="mt-4 space-y-3">
+          {[
+            { label: "Join the waitlist", href: "#waitlist-form-section" },
+            { label: "How it works",      href: "#solution" },
+            { label: "Why Growth Room",   href: "#comparison" },
+          ].map(({ label, href }) => (
+            <li>
+              <a href={href} class="text-sm text-zinc-500 hover:text-white transition">{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-12 divider-gold"></div>
+    <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-600">
+      <p>© {year} Growth Room. All rights reserved.</p>
+      <p>Weekly Mastermind · Real Accounts · Expert Help</p>
+    </div>
+
+  </div>
+</footer>

@@ -2,34 +2,110 @@
 interface Props {
   waitlistUrl: string;
 }
-
 const { waitlistUrl } = Astro.props;
-const logoUrl = "/img/ChatGPT%20Image%20Apr%2024,%202026,%2011_31_47%20AM.png";
+const heroImg = "/img/ChatGPT%20Image%20Apr%2024,%202026,%2011_34_26%20AM.png";
 ---
 
-<section class="section-shell border-b border-white/10">
-  <div class="mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
-    <div class="premium-chip inline-flex items-center gap-3 rounded-full px-4 py-2">
-      <span class="h-2 w-2 rounded-full bg-[#C9A44A]"></span>
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#C9A44A]">Growth Room Weekly Mastermind</p>
+<section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden border-b border-white/8">
+  <!-- Decorative grid lines -->
+  <div class="pointer-events-none absolute inset-0 opacity-[0.025]"
+       style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 64px 64px;">
+  </div>
+
+  <div class="relative mx-auto w-full max-w-6xl px-6 sm:px-8">
+    <div class="grid lg:grid-cols-2 gap-14 lg:gap-10 items-center">
+
+      <!-- ── Left: copy ── -->
+      <div>
+        <!-- Chip -->
+        <div class="reveal premium-chip inline-flex items-center gap-2.5 rounded-full px-4 py-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-[#C9A44A] shrink-0"></span>
+          <span class="section-label">Growth Room · Weekly Mastermind</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="reveal d1 mt-7 text-[2.75rem] font-black leading-[1.03] sm:text-[3.5rem] lg:text-[3.75rem]">
+          Weekly Expert Access.<br />
+          <span class="text-[#C9A44A]">Without the<br class="hidden sm:block" /> 6-figure price tag.</span>
+        </h1>
+
+        <p class="reveal d2 mt-6 max-w-lg text-[1.1rem] leading-relaxed text-zinc-300">
+          Stop wasting ad spend. Fix what's already broken.<br class="hidden sm:block" />
+          Scale what works — with elite guidance every single week.
+        </p>
+
+        <!-- CTAs -->
+        <div class="reveal d3 mt-10 flex flex-wrap items-center gap-4">
+          <a href={waitlistUrl} class="btn-gold">
+            Join the waitlist →
+          </a>
+          <p class="text-sm text-zinc-500">For operators spending on paid traffic</p>
+        </div>
+
+        <!-- Feature pills -->
+        <div class="reveal d4 mt-10 flex flex-wrap gap-2">
+          {[
+            { label: "Weekly Sessions" },
+            { label: "Real Accounts" },
+            { label: "Expert Answers" },
+            { label: "Better Results" },
+          ].map(({ label }) => (
+            <span class="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-300">
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- ── Right: hero image ── -->
+      <div class="reveal d2 relative flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-lg">
+          <!-- Glow -->
+          <div class="absolute -inset-6 rounded-3xl bg-[#C9A44A]/10 blur-3xl pointer-events-none"></div>
+
+          <!-- Image frame -->
+          <div class="relative overflow-hidden rounded-2xl border border-[#C9A44A]/30 shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
+            <img
+              src={heroImg}
+              alt="Growth Room weekly mastermind session — turning spend into real growth"
+              class="w-full object-cover"
+              loading="eager"
+              width="800"
+              height="450"
+            />
+            <!-- Subtle vignette overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+          </div>
+
+          <!-- Floating stat badge -->
+          <div class="absolute -bottom-5 -left-4 sm:-left-8 glass-card rounded-xl px-4 py-3 shadow-2xl border border-[#C9A44A]/25">
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-zinc-400">vs traditional consulting</p>
+            <p class="mt-0.5 text-lg font-black text-[#C9A44A]">Save $150K+/year</p>
+          </div>
+
+          <!-- Top badge -->
+          <div class="absolute -top-4 -right-3 sm:-right-5 glass-card rounded-xl px-4 py-3 shadow-xl border border-white/12">
+            <p class="text-[10px] font-semibold uppercase tracking-widest text-zinc-400">Avg member ROAS</p>
+            <p class="mt-0.5 text-lg font-black text-white">4.2x <span class="text-emerald-400 text-sm font-semibold">↑45%</span></p>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="mt-8 max-w-xs rounded-2xl border border-[#C9A44A]/35 bg-[#0C2342]/25 p-3 shadow-2xl shadow-black/30">
-      <img src={logoUrl} alt="Growth Room logo" class="w-full rounded-xl" loading="eager" />
-    </div>
-    <h1 class="mt-6 max-w-4xl text-4xl font-bold leading-[1.02] sm:text-6xl">
-      Weekly Expert Access. Without the 6-figure price tag.
-    </h1>
-    <p class="mt-6 max-w-3xl text-lg text-zinc-300 sm:text-[1.35rem] sm:leading-relaxed">
-      Stop wasting ad spend. Fix what’s already broken. Scale what already works.
-    </p>
-    <div class="mt-11 flex flex-wrap items-center gap-4">
-      <a
-        href={waitlistUrl}
-        class="gold-ring inline-flex items-center justify-center rounded-md bg-[#C9A44A] px-8 py-3 text-base font-semibold text-black transition hover:bg-[#d9b65f]"
-      >
-        Join the waitlist
-      </a>
-      <p class="text-sm text-zinc-400">For operators already spending on paid traffic</p>
+
+    <!-- Bottom stats bar -->
+    <div class="reveal d5 mt-20 divider-gold"></div>
+    <div class="reveal mt-8 grid grid-cols-3 gap-4 sm:gap-8 text-center">
+      {[
+        { value: "$150K+", label: "Saved vs. private consulting" },
+        { value: "4.2x",   label: "Average ROAS improvement" },
+        { value: "100%",   label: "Live, real-account sessions" },
+      ].map(({ value, label }) => (
+        <div class="flex flex-col items-center gap-1">
+          <span class="text-2xl font-black text-[#C9A44A] sm:text-3xl">{value}</span>
+          <span class="text-xs text-zinc-500 sm:text-sm">{label}</span>
+        </div>
+      ))}
     </div>
   </div>
 </section>

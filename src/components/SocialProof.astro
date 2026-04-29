@@ -1,0 +1,75 @@
+---
+const metrics = [
+  { value: "$245,600", label: "Revenue tracked live in session", delta: "+32%", color: "text-emerald-400" },
+  { value: "3,842",    label: "Conversions recovered",          delta: "+28%", color: "text-emerald-400" },
+  { value: "4.6x",    label: "ROAS improvement achieved",      delta: "+45%", color: "text-emerald-400" },
+];
+
+const quotes = [
+  {
+    text: "We stopped the bleed in 2 weeks. I brought the account live and they spotted the issue in 20 minutes. Would've taken me months alone.",
+    name: "Marco V.",
+    role: "E-commerce founder · Meta Ads",
+  },
+  {
+    text: "The real value isn't just the answers — it's how quickly the problems get named. I always leave with 3 clear next moves.",
+    name: "Ana R.",
+    role: "Performance marketer · Google & TikTok",
+  },
+];
+---
+
+<section class="section-shell border-b border-white/8 overflow-hidden">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+
+    <!-- Header -->
+    <div class="reveal text-center">
+      <p class="section-label">Real Results</p>
+      <h2 class="mt-4 text-3xl font-bold sm:text-[2.75rem]">
+        Grow together.<br />
+        <span class="text-[#C9A44A]">Go further.</span>
+      </h2>
+      <p class="mt-4 text-zinc-400 max-w-xl mx-auto">
+        Numbers pulled directly from live session reviews.
+      </p>
+    </div>
+
+    <!-- Metrics -->
+    <div class="reveal mt-14 grid gap-4 sm:grid-cols-3">
+      {metrics.map(({ value, label, delta, color }) => (
+        <div class="glass-card rounded-2xl p-8 text-center relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#C9A44A]/60 to-transparent"></div>
+          <p class={`text-4xl font-black ${color} sm:text-5xl`}>{value}</p>
+          <p class="mt-1 text-sm font-semibold text-[#C9A44A]">{delta}</p>
+          <p class="mt-2 text-sm text-zinc-500">{label}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Divider -->
+    <div class="reveal mt-16 divider-gold"></div>
+
+    <!-- Testimonials -->
+    <div class="mt-12 grid gap-5 sm:grid-cols-2">
+      {quotes.map(({ text, name, role }, i) => (
+        <div class={`reveal d${i + 1} glass-card rounded-2xl p-7`}>
+          <!-- Quote mark -->
+          <svg class="text-[#C9A44A]/40 mb-4" width="28" height="20" viewBox="0 0 28 20" fill="currentColor">
+            <path d="M0 20V12.727C0 5.497 4.364 1.212 13.091 0l1.455 2.182C10.424 3.03 8.364 5.03 7.636 8.182H12V20H0ZM16 20V12.727C16 5.497 20.364 1.212 29.091 0l1.455 2.182C26.424 3.03 24.364 5.03 23.636 8.182H28V20H16Z"/>
+          </svg>
+          <p class="text-[15px] leading-relaxed text-zinc-200 italic">"{text}"</p>
+          <div class="mt-5 flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-[#C9A44A]/20 border border-[#C9A44A]/30 flex items-center justify-center text-xs font-bold text-[#C9A44A]">
+              {name.charAt(0)}
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white">{name}</p>
+              <p class="text-xs text-zinc-500">{role}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

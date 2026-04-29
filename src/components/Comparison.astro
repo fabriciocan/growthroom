@@ -1,0 +1,99 @@
+---
+const traditional = [
+  "Very high cost — $150K+/year",
+  "Limited availability from consultants",
+  "One perspective, one lens",
+  "Slow progress, delayed feedback",
+  "Generic advice, no live testing",
+];
+
+const growthroom = [
+  "Fraction of the cost",
+  "Weekly live access, every week",
+  "Multiple expert perspectives",
+  "Faster growth — decisions made live",
+  "Real accounts, real-time solutions",
+];
+
+const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
+const iconX     = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
+
+const iconAccess = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`;
+const iconCost   = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+const iconGrowth = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`;
+---
+
+<section id="comparison" class="section-shell border-b border-white/8">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+
+    <!-- Header -->
+    <div class="reveal text-center">
+      <p class="section-label">Why Growth Room</p>
+      <h2 class="mt-4 text-3xl font-bold sm:text-[2.75rem]">
+        The smarter alternative to<br class="hidden sm:block" />
+        <span class="text-[#C9A44A]">six-figure consulting.</span>
+      </h2>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="reveal mt-14 grid gap-4 sm:grid-cols-[1fr_auto_1fr] sm:gap-6 items-stretch">
+
+      <!-- Traditional consulting -->
+      <div class="glass-card rounded-2xl p-7">
+        <p class="section-label text-zinc-500">Traditional Consulting</p>
+        <p class="mt-3 text-4xl font-black text-white">$150K<span class="text-2xl text-zinc-400">+/yr</span></p>
+        <div class="mt-6 divider-gold opacity-30"></div>
+        <ul class="mt-6 space-y-3.5">
+          {traditional.map((item) => (
+            <li class="flex items-start gap-3 text-sm text-zinc-400">
+              <span class="mt-0.5 shrink-0 text-red-400/70"><Fragment set:html={iconX} /></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- VS badge -->
+      <div class="flex items-center justify-center">
+        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/8 text-sm font-black text-zinc-300 shadow-lg">
+          VS
+        </div>
+      </div>
+
+      <!-- Growth Room -->
+      <div class="glass-card-gold gold-ring rounded-2xl p-7 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-[#C9A44A]/8 rounded-bl-full pointer-events-none"></div>
+        <p class="section-label">Growth Room</p>
+        <p class="mt-3 text-xl font-bold text-white leading-tight">
+          Weekly Expert Access.<br />
+          <span class="text-[#C9A44A]">A fraction of the cost.</span>
+        </p>
+        <div class="mt-6 divider-gold"></div>
+        <ul class="mt-6 space-y-3.5">
+          {growthroom.map((item) => (
+            <li class="flex items-start gap-3 text-sm text-white">
+              <span class="mt-0.5 shrink-0 text-[#C9A44A]"><Fragment set:html={iconCheck} /></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom row — full-width horizontal cards with SVG icons -->
+    <div class="reveal mt-6 grid grid-cols-3 gap-4">
+      {[
+        { icon: iconAccess, label: "More Access" },
+        { icon: iconCost,   label: "Less Cost"   },
+        { icon: iconGrowth, label: "Real Growth" },
+      ].map(({ icon, label }) => (
+        <div class="glass-card rounded-xl py-6 flex flex-col items-center gap-3">
+          <span class="text-[#C9A44A]"><Fragment set:html={icon} /></span>
+          <span class="text-xs font-bold uppercase tracking-widest text-[#C9A44A]">{label}</span>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

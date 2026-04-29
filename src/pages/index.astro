@@ -1,27 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Problem from '../components/Problem.astro';
+import Comparison from '../components/Comparison.astro';
 import Solution from '../components/Solution.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import ValueStack from '../components/ValueStack.astro';
 import Benefits from '../components/Benefits.astro';
-import HowItWorks from '../components/HowItWorks.astro';
+import SocialProof from '../components/SocialProof.astro';
 import WaitlistCta from '../components/WaitlistCta.astro';
+import Footer from '../components/Footer.astro';
 
-const waitlistUrl = "#waitlist";
+const waitlistUrl = "#waitlist-form-section";
 ---
 
 <Layout
-	title="Growth Room | Weekly Expert Access"
-	description="Fix what is broken in your paid acquisition, recover wasted spend, and scale what works."
+  title="Growth Room | Weekly Expert Access Without the 6-Figure Price Tag"
+  description="A private weekly mastermind where entrepreneurs fix real ad problems live, every week. Expert guidance at a fraction of traditional consulting costs."
 >
-	<Hero waitlistUrl={waitlistUrl} />
-	<Problem />
-	<Solution />
-	<ValueStack />
-	<Benefits />
-	<HowItWorks />
-	<div id="waitlist">
-		<WaitlistCta waitlistUrl={waitlistUrl} />
-	</div>
+  <Navbar waitlistUrl={waitlistUrl} />
+  <Hero waitlistUrl={waitlistUrl} />
+  <Problem />
+  <Comparison />
+  <Solution />
+  <HowItWorks />
+  <ValueStack />
+  <Benefits />
+  <SocialProof />
+  <div id="waitlist">
+    <WaitlistCta waitlistUrl={waitlistUrl} />
+  </div>
+  <Footer />
 </Layout>

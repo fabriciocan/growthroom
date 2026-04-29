@@ -3,67 +3,151 @@
 :root {
   color-scheme: dark;
   --brand-gold: #c9a44a;
+  --brand-gold-hover: #d9b85f;
   --brand-navy: #0c2342;
-  --brand-cream: #f5efe4;
 }
 
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: rgba(201,164,74,0.35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(201,164,74,0.6); }
+
+/* ── Base ── */
 body {
-  background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(201, 164, 74, 0.14), transparent 60%),
-    radial-gradient(900px 500px at 90% 0%, rgba(201, 164, 74, 0.08), transparent 55%),
-    #0a0a0a;
+  background: #0a0a0a;
   color: #f5f5f5;
   letter-spacing: 0.01em;
   font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-h1,
-h2,
-h3 {
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 1100px 500px at 15% -5%, rgba(201,164,74,0.11) 0%, transparent 65%),
+    radial-gradient(ellipse 800px 400px at 85% 5%,  rgba(201,164,74,0.06) 0%, transparent 60%);
+}
+
+body > * { position: relative; z-index: 1; }
+
+h1, h2, h3 {
   font-family: "Montserrat", "Inter", sans-serif;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.015em;
 }
 
 ::selection {
-  background: rgba(201, 164, 74, 0.35);
+  background: rgba(201,164,74,0.35);
   color: #fff;
 }
 
-.section-shell {
-  position: relative;
-}
-
-.section-shell::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0) 18%,
-    rgba(255, 255, 255, 0) 82%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
-}
-
+/* ── Dark section components ── */
 .glass-card {
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+  backdrop-filter: blur(4px);
+}
+
+.glass-card-gold {
+  border: 1px solid rgba(201,164,74,0.22);
+  background: linear-gradient(145deg, rgba(201,164,74,0.1) 0%, rgba(201,164,74,0.03) 100%);
 }
 
 .gold-ring {
   box-shadow:
-    0 0 0 1px rgba(201, 164, 74, 0.35),
-    0 14px 40px rgba(0, 0, 0, 0.45);
-}
-
-.brand-navy {
-  color: var(--brand-navy);
+    0 0 0 1px rgba(201,164,74,0.28),
+    0 16px 48px rgba(0,0,0,0.5);
 }
 
 .premium-chip {
-  border: 1px solid rgba(201, 164, 74, 0.3);
-  background: linear-gradient(130deg, rgba(201, 164, 74, 0.18), rgba(201, 164, 74, 0.06));
+  border: 1px solid rgba(201,164,74,0.32);
+  background: linear-gradient(130deg, rgba(201,164,74,0.16) 0%, rgba(201,164,74,0.05) 100%);
 }
+
+/* ── White section components ── */
+.card-light {
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.card-light-muted {
+  border: 1px solid rgba(0,0,0,0.07);
+  background: #f7f7f5;
+}
+
+/* ── Dark gold gradient ── */
+.section-gold-gradient {
+  background:
+    linear-gradient(155deg, #0a0600 0%, #1e1100 28%, #2e1a04 52%, #1e1100 74%, #0a0600 100%);
+}
+
+/* ── Shared utilities ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a44a;
+}
+
+.section-label-dark {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #a07c2a;
+}
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201,164,74,0.45) 50%, transparent 100%);
+}
+
+.divider-gray {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.12) 50%, transparent 100%);
+}
+
+/* btn-gold dentro de @layer components garante que Tailwind utilities
+   (incluindo .hidden { display:none }) tenham prioridade sobre display:inline-flex */
+@layer components {
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #c9a44a;
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(201,164,74,0.25);
+  }
+  .btn-gold:hover {
+    background: #d9b85f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 28px rgba(201,164,74,0.38);
+  }
+}
+
+/* ── Reveal animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal { opacity: 0; }
+.reveal.visible {
+  animation: fadeUp 0.65s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+.reveal.d1 { animation-delay: 0.08s; }
+.reveal.d2 { animation-delay: 0.16s; }
+.reveal.d3 { animation-delay: 0.24s; }
+.reveal.d4 { animation-delay: 0.32s; }
+.reveal.d5 { animation-delay: 0.40s; }

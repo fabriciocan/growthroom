@@ -1,19 +1,68 @@
-<section class="section-shell border-b border-white/10">
-  <div class="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8 sm:py-24">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#C9A44A]">The problem</p>
-    <h2 class="mt-5 max-w-4xl text-3xl font-bold leading-tight sm:text-5xl">
-      You are spending money on ads, but still guessing what is broken.
-    </h2>
-    <p class="mt-6 max-w-3xl text-lg text-zinc-300">
-      Campaigns run. Budget goes out. Results come in waves. One week looks fine, the next one drops
-      without warning. Tracking is noisy, conversion data is unclear, and every decision starts to feel
-      like trial and error.
-    </p>
-    <ul class="mt-9 grid gap-3 text-zinc-200 sm:grid-cols-2">
-      <li class="glass-card rounded-md p-4">Wasted ad spend every month</li>
-      <li class="glass-card rounded-md p-4">Broken or unreliable tracking</li>
-      <li class="glass-card rounded-md p-4">Inconsistent conversions</li>
-      <li class="glass-card rounded-md p-4">No clear priority on what to fix next</li>
-    </ul>
+---
+const problems = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
+    title: "Wasted ad spend every month",
+    body: "Budget burns while results stay flat. You can feel the leak but can't pinpoint where it's coming from.",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
+    title: "Broken or unreliable tracking",
+    body: "You're making decisions on data you can't trust. Conversions misfire, attribution is wrong, and every metric is suspect.",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
+    title: "Inconsistent conversions",
+    body: "One week looks promising, the next drops without warning. There's no reliable pattern you can build a business on.",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
+    title: "No clear priority on what to fix first",
+    body: "Too many moving parts, too many opinions. You spend more time debating than executing.",
+  },
+];
+---
+
+<!-- WHITE SECTION -->
+<section class="border-b border-gray-200" style="background:#ffffff;">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+
+    <!-- Header -->
+    <div class="reveal">
+      <p class="section-label-dark">The problem</p>
+      <h2 class="mt-4 max-w-3xl text-3xl font-bold leading-tight text-gray-900 sm:text-[2.75rem]">
+        You're spending money on ads,<br class="hidden sm:block" />
+        but still <span class="text-[#C9A44A]">guessing what's broken.</span>
+      </h2>
+      <p class="mt-5 max-w-2xl text-lg text-gray-500 leading-relaxed">
+        Campaigns run. Budget goes out. Results arrive in waves — then drop for no clear reason.
+        Tracking is noisy, attribution is unclear, and every decision starts to feel like trial and error.
+      </p>
+    </div>
+
+    <!-- Full-width horizontal cards -->
+    <div class="mt-12 flex flex-col gap-4">
+      {problems.map(({ icon, title, body }, i) => (
+        <div class={`reveal d${i + 1} card-light rounded-2xl p-7 flex items-start gap-5`}>
+          <div class="mt-0.5 shrink-0 flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-400">
+            <Fragment set:html={icon} />
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900">{title}</h3>
+            <p class="mt-1.5 text-[15px] leading-relaxed text-gray-500">{body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Quote -->
+    <div class="reveal mt-8 rounded-2xl border border-gray-200 bg-gray-50 px-7 py-6">
+      <p class="text-[15px] text-gray-600 italic leading-relaxed">
+        "The worst part isn't losing money on bad ads — it's not knowing
+        <span class="text-gray-900 font-semibold not-italic">why</span> they're bad,
+        and what to do about it next week."
+      </p>
+    </div>
+
   </div>
 </section>

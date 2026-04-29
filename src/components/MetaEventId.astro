@@ -1,0 +1,35 @@
+---
+// CRÍTICO: este componente deve ser o PRIMEIRO do <head>, antes do GTM e do Pixel.
+// Gera o event_id único que deuplica browser ↔ CAPI server side.
+---
+
+<script is:inline>
+  (function () {
+    function generateEventId() {
+      return Date.now() + '_' + Math.floor(Math.random() * 1e15);
+    }
+
+    function initEventId() {
+      window.dataLayer = window.dataLayer || [];
+
+      // Reutiliza event_id se já existir na dataLayer (ex: View Transitions)
+      for (var i = window.dataLayer.length - 1; i >= 0; i--) {
+        if (window.dataLayer[i] && window.dataLayer[i].event_id) {
+          window.META_EVENT_ID = window.dataLayer[i].event_id;
+          return;
+        }
+      }
+
+      window.META_EVENT_ID = generateEventId();
+      window.dataLayer.push({
+        event: 'meta_event_id_ready',
+        event_id: window.META_EVENT_ID,
+      });
+    }
+
+    initEventId();
+
+    // Suporte a View Transitions do Astro
+    document.addEventListener('astro:page-load', initEventId);
+  })();
+</script>

@@ -1,15 +1,93 @@
-<section class="section-shell border-b border-white/10">
-  <div class="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8 sm:py-24">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#C9A44A]">Outcomes</p>
-    <h2 class="mt-5 max-w-4xl text-3xl font-bold leading-tight sm:text-5xl">
-      What changes when you stop guessing and start fixing the right bottlenecks.
-    </h2>
-    <div class="mt-10 grid gap-4 sm:grid-cols-2">
-      <div class="glass-card rounded-md p-5">Fix tracking issues faster</div>
-      <div class="glass-card rounded-md p-5">Recover wasted budget</div>
-      <div class="glass-card rounded-md p-5">Improve conversion consistency</div>
-      <div class="glass-card rounded-md p-5">Get clear strategic priorities</div>
-      <div class="glass-card rounded-md p-5 sm:col-span-2">Scale winning campaigns faster</div>
+---
+const iconSearch  = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`;
+const iconMoney   = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`;
+const iconPulse   = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`;
+const iconTarget  = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`;
+const iconTrend   = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`;
+
+const outcomes = [
+  {
+    icon: iconSearch,
+    title: "Fix tracking issues faster",
+    body: "Diagnose broken pixels, misconfigured events, and attribution gaps with expert eyes on your actual setup.",
+    tag: "Tracking",
+  },
+  {
+    icon: iconMoney,
+    title: "Recover wasted budget",
+    body: "Stop the bleed. Identify exactly where spend is leaking and redirect it toward what's actually converting.",
+    tag: "ROAS",
+  },
+  {
+    icon: iconPulse,
+    title: "Improve conversion consistency",
+    body: "Find the pattern behind your best weeks and replicate it — so results don't just happen, they're engineered.",
+    tag: "CVR",
+  },
+  {
+    icon: iconTarget,
+    title: "Get clear strategic priorities",
+    body: "No more guessing what to fix first. Walk out of every session with a ranked action list that makes sense.",
+    tag: "Clarity",
+  },
+  {
+    icon: iconTrend,
+    title: "Scale winning campaigns faster",
+    body: "When something works, know exactly how to scale it without blowing up what's already performing.",
+    tag: "Scale",
+  },
+];
+---
+
+<!-- WHITE SECTION -->
+<section class="border-b border-gray-200" style="background:#ffffff;">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+
+    <!-- Header -->
+    <div class="reveal">
+      <p class="section-label-dark">Outcomes</p>
+      <h2 class="mt-4 max-w-3xl text-3xl font-bold leading-tight text-gray-900 sm:text-[2.75rem]">
+        What changes when you stop guessing<br class="hidden sm:block" />
+        and start <span class="text-[#C9A44A]">fixing the right bottlenecks.</span>
+      </h2>
     </div>
+
+    <!-- Full-width horizontal outcome cards -->
+    <div class="mt-12 flex flex-col gap-4">
+      {outcomes.slice(0, 4).map(({ icon, title, body, tag }, i) => (
+        <div class={`reveal d${i + 1} card-light rounded-2xl p-7 flex items-start gap-6`}>
+          <div class="shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-[#C9A44A]/10 text-[#C9A44A]">
+            <Fragment set:html={icon} />
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 flex-wrap">
+              <h3 class="font-bold text-gray-900 text-lg">{title}</h3>
+              <span class="rounded-full border border-[#C9A44A]/40 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#a07c2a]">{tag}</span>
+            </div>
+            <p class="mt-2 text-[15px] leading-relaxed text-gray-500">{body}</p>
+          </div>
+        </div>
+      ))}
+
+      <!-- Highlighted last card -->
+      {(() => {
+        const { icon, title, body, tag } = outcomes[4];
+        return (
+          <div class="reveal d5 rounded-2xl border border-[#C9A44A]/30 bg-gradient-to-r from-[#C9A44A]/8 to-[#C9A44A]/3 p-8 flex items-start gap-6">
+            <div class="shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-[#C9A44A]/15 text-[#C9A44A]">
+              <Fragment set:html={icon} />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 flex-wrap">
+                <h3 class="text-lg font-bold text-gray-900">{title}</h3>
+                <span class="rounded-full border border-[#C9A44A]/40 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#a07c2a]">{tag}</span>
+              </div>
+              <p class="mt-2 text-[15px] leading-relaxed text-gray-600 max-w-2xl">{body}</p>
+            </div>
+          </div>
+        );
+      })()}
+    </div>
+
   </div>
 </section>

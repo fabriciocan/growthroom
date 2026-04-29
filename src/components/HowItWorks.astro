@@ -1,23 +1,67 @@
-<section class="section-shell border-b border-white/10">
-  <div class="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8 sm:py-24">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#C9A44A]">How it works</p>
-    <h2 class="mt-5 max-w-4xl text-3xl font-bold leading-tight sm:text-5xl">Simple operating model.</h2>
-    <div class="mt-10 grid gap-4 sm:grid-cols-3">
-      <article class="glass-card rounded-md p-6">
-        <p class="text-sm font-semibold text-[#C9A44A]">Step 01</p>
-        <h3 class="mt-2 text-xl font-semibold">Join</h3>
-        <p class="mt-2 text-sm text-zinc-300">Secure your seat in a focused group of active ad operators.</p>
-      </article>
-      <article class="glass-card rounded-md p-6">
-        <p class="text-sm font-semibold text-[#C9A44A]">Step 02</p>
-        <h3 class="mt-2 text-xl font-semibold">Bring your account</h3>
-        <p class="mt-2 text-sm text-zinc-300">Share your campaigns, data, and current bottlenecks.</p>
-      </article>
-      <article class="glass-card rounded-md p-6">
-        <p class="text-sm font-semibold text-[#C9A44A]">Step 03</p>
-        <h3 class="mt-2 text-xl font-semibold">Get solutions live</h3>
-        <p class="mt-2 text-sm text-zinc-300">Leave each session with clear priorities and next actions.</p>
-      </article>
+---
+const steps = [
+  {
+    number: "01",
+    title: "Join the waitlist",
+    body: "Secure your seat in a focused group of active ad operators. Spots are strictly limited to keep sessions high-signal.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  },
+  {
+    number: "02",
+    title: "Bring your account",
+    body: "Show up with your real campaigns, real data, and real bottlenecks. This is where the work happens — not in theory.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>`,
+  },
+  {
+    number: "03",
+    title: "Get solutions live",
+    body: "Leave every session with clear priorities and next actions you can implement immediately — not notes to decipher later.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+  },
+];
+---
+
+<!-- WHITE SECTION -->
+<section class="border-b border-gray-200" style="background:#ffffff;">
+  <div class="mx-auto w-full max-w-6xl px-6 py-24 sm:px-8 sm:py-32">
+
+    <!-- Header -->
+    <div class="reveal">
+      <p class="section-label-dark">How it works</p>
+      <h2 class="mt-4 text-3xl font-bold text-gray-900 sm:text-[2.75rem]">
+        Simple operating model.<br />
+        <span class="text-[#C9A44A]">Serious results.</span>
+      </h2>
+      <p class="mt-4 text-lg text-gray-500 max-w-xl">
+        No onboarding maze. No 12-week delay before value.
+      </p>
     </div>
+
+    <!-- Full-width step cards -->
+    <div class="mt-12 flex flex-col gap-4">
+      {steps.map(({ number, title, body, icon }, i) => (
+        <div class={`reveal d${i + 1} card-light rounded-2xl p-8 flex items-start gap-6`}>
+          <!-- Step number + icon -->
+          <div class="shrink-0 flex flex-col items-center gap-2">
+            <div class="flex h-14 w-14 items-center justify-center rounded-xl border border-[#C9A44A]/30 bg-[#C9A44A]/8 text-[#C9A44A]">
+              <Fragment set:html={icon} />
+            </div>
+            <span class="text-xs font-black tracking-tight text-[#C9A44A]">{number}</span>
+          </div>
+
+          <!-- Connector line (desktop) -->
+          <div class="hidden sm:flex flex-col justify-center mt-1 shrink-0">
+            <div class="w-8 h-px bg-gradient-to-r from-[#C9A44A]/40 to-transparent"></div>
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <h3 class="text-xl font-bold text-gray-900">{title}</h3>
+            <p class="mt-2 text-[15px] leading-relaxed text-gray-500 max-w-2xl">{body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
   </div>
 </section>

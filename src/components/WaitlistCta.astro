@@ -1,194 +1,245 @@
 ---
+import FormScript from "./FormScript.astro";
+
 interface Props {
   waitlistUrl: string;
 }
-
 const { waitlistUrl } = Astro.props;
+
+const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>`;
 ---
 
-<section class="section-shell py-20 sm:py-24">
+<FormScript />
+
+<section class="section-gold-gradient py-24 sm:py-32">
   <div class="mx-auto w-full max-w-6xl px-6 sm:px-8">
-    <div class="gold-ring rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 sm:p-10">
-      <h2 class="max-w-3xl text-3xl font-bold leading-tight sm:text-5xl">
-        Join the waitlist before doors open.
+
+    <!-- Main CTA card -->
+    <div class="reveal relative overflow-hidden rounded-3xl border border-[#C9A44A]/30 bg-white/4 p-8 backdrop-blur-sm sm:p-14"
+         style="box-shadow: 0 0 0 1px rgba(201,164,74,0.2), 0 32px 80px rgba(0,0,0,0.6);">
+      <!-- Ambient glows -->
+      <div class="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-[#C9A44A]/12 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#C9A44A]/6 blur-2xl"></div>
+
+      <!-- Urgency chip -->
+      <div class="relative inline-flex items-center gap-2 rounded-full border border-[#C9A44A]/35 bg-[#C9A44A]/10 px-4 py-1.5">
+        <span class="h-1.5 w-1.5 rounded-full bg-[#C9A44A] animate-pulse"></span>
+        <span class="section-label">Spots are strictly limited</span>
+      </div>
+
+      <!-- Headline -->
+      <h2 class="relative mt-6 text-4xl font-black leading-[1.05] text-white sm:text-5xl lg:text-6xl">
+        Stop figuring<br class="sm:hidden" /> it out alone.
       </h2>
-      <p class="mt-4 max-w-2xl text-lg text-zinc-300">
-        If you are already spending on paid traffic and want consistent, expert-level direction, this is for
-        you.
+      <p class="relative mt-5 max-w-xl text-lg text-[#C9A44A]/70 leading-relaxed">
+        If you're already spending on paid traffic and want consistent,
+        expert-level direction every week — this is for you.
       </p>
-      <div class="mt-8">
-        <a
-          href={waitlistUrl}
-          class="inline-flex items-center justify-center rounded-md bg-[#C9A44A] px-8 py-3 text-base font-semibold text-black transition hover:bg-[#d9b65f]"
-        >
-          Join the waitlist
+
+      <!-- Reassurance bullets -->
+      <div class="relative mt-6 flex flex-wrap gap-x-6 gap-y-2">
+        {[
+          "No minimum commitment",
+          "Weekly expert access",
+          "Real-account sessions",
+        ].map((item) => (
+          <div class="flex items-center gap-2 text-sm text-[#C9A44A]/60">
+            <span class="text-[#C9A44A]"><Fragment set:html={iconCheck} /></span>
+            {item}
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA button -->
+      <div class="relative mt-9">
+        <a href="#waitlist-form-section" class="btn-gold !text-base !px-10 !py-4 !rounded-xl">
+          Join the waitlist now →
         </a>
       </div>
-      <div class="mt-10 rounded-md border border-white/12 bg-black/45 p-5 sm:p-7">
-        <p class="text-sm font-semibold uppercase tracking-[0.15em] text-[#C9A44A]">Waitlist form</p>
-        <form id="waitlist-form" class="mt-6">
-          <div class="space-y-6" data-step="1">
-            <p class="text-sm text-zinc-400">Step 1 of 3</p>
-            <div>
-              <label for="fullName" class="mb-2 block text-sm text-zinc-200">Full name</label>
-              <input
-                id="fullName"
-                name="fullName"
-                required
-                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
-                placeholder="Your name"
-              />
-            </div>
-            <div>
-              <label for="email" class="mb-2 block text-sm text-zinc-200">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
-                placeholder="you@company.com"
-              />
-            </div>
-          </div>
-
-          <div class="hidden space-y-6" data-step="2">
-            <p class="text-sm text-zinc-400">Step 2 of 3</p>
-            <div>
-              <label for="channels" class="mb-2 block text-sm text-zinc-200">Main paid channels</label>
-              <input
-                id="channels"
-                name="channels"
-                required
-                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
-                placeholder="Meta, Google, TikTok..."
-              />
-            </div>
-            <div>
-              <label for="monthlySpend" class="mb-2 block text-sm text-zinc-200">Monthly ad spend (€)</label>
-              <input
-                id="monthlySpend"
-                name="monthlySpend"
-                type="number"
-                min="1"
-                required
-                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
-                placeholder="5000"
-              />
-            </div>
-          </div>
-
-          <div class="hidden space-y-6" data-step="3">
-            <p class="text-sm text-zinc-400">Step 3 of 3</p>
-            <div>
-              <label for="biggestBlocker" class="mb-2 block text-sm text-zinc-200">Biggest current blocker</label>
-              <textarea
-                id="biggestBlocker"
-                name="biggestBlocker"
-                rows="4"
-                required
-                class="w-full rounded-md border border-white/12 bg-white/5 px-4 py-3 text-white outline-none ring-[#C9A44A] placeholder:text-zinc-500 focus:ring-2"
-                placeholder="What is costing you the most right now?"
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="mt-8 flex flex-wrap gap-3">
-            <button
-              id="back-btn"
-              type="button"
-              class="hidden rounded-md border border-white/15 px-6 py-3 text-sm font-semibold text-zinc-200 transition hover:bg-white/5"
-            >
-              Back
-            </button>
-            <button
-              id="next-btn"
-              type="button"
-              class="rounded-md bg-[#C9A44A] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#d9b65f]"
-            >
-              Continue
-            </button>
-            <button
-              id="submit-btn"
-              type="submit"
-              class="hidden rounded-md bg-[#C9A44A] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#d9b65f]"
-            >
-              Join the waitlist
-            </button>
-          </div>
-          <p id="form-success" class="mt-5 hidden rounded-md border border-[#C9A44A]/40 bg-[#C9A44A]/10 p-4 text-sm text-zinc-100">
-            Thanks. You are in. We will contact you soon with next steps.
-          </p>
-          <p id="form-error" class="mt-5 hidden rounded-md border border-red-400/40 bg-red-500/10 p-4 text-sm text-zinc-100">
-            Could not save your lead right now. Please try again.
-          </p>
-        </form>
-      </div>
     </div>
+
+    <!-- Form section -->
+    <div id="waitlist-form-section" class="reveal mt-8 rounded-2xl border border-[#C9A44A]/20 bg-white/4 p-8 backdrop-blur-sm sm:p-10">
+      <p class="section-label">Waitlist application</p>
+      <p class="mt-2 text-sm text-[#C9A44A]/50">Takes 60 seconds. We'll reach out with next steps.</p>
+
+      <form id="waitlist-form" class="mt-8">
+        <!-- Step 1 -->
+        <div class="space-y-5" data-step="1">
+          <p class="flex items-center gap-2 text-xs font-semibold text-[#C9A44A]/50">
+            <span class="h-5 w-5 flex items-center justify-center rounded-full bg-[#C9A44A]/15 text-[#C9A44A] text-[10px] font-black">1</span>
+            Step 1 of 3 — Basic info
+          </p>
+          <div>
+            <label for="fullName" class="mb-2 block text-sm font-medium text-zinc-200">Full name</label>
+            <input id="fullName" name="fullName" required
+              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white text-sm outline-none ring-[#C9A44A] placeholder:text-zinc-600 focus:ring-2 transition"
+              placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email" class="mb-2 block text-sm font-medium text-zinc-200">Email address</label>
+            <input id="email" name="email" type="email" required
+              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white text-sm outline-none ring-[#C9A44A] placeholder:text-zinc-600 focus:ring-2 transition"
+              placeholder="you@company.com" />
+          </div>
+          <div>
+            <label for="phone" class="mb-2 block text-sm font-medium text-zinc-200">Phone number</label>
+            <input id="phone" name="phone" type="tel" required
+              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white text-sm outline-none ring-[#C9A44A] placeholder:text-zinc-600 focus:ring-2 transition"
+              placeholder="+351 912 345 678" />
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="hidden space-y-5" data-step="2">
+          <p class="flex items-center gap-2 text-xs font-semibold text-[#C9A44A]/50">
+            <span class="h-5 w-5 flex items-center justify-center rounded-full bg-[#C9A44A]/15 text-[#C9A44A] text-[10px] font-black">2</span>
+            Step 2 of 3 — Your ad setup
+          </p>
+          <div>
+            <label for="channels" class="mb-2 block text-sm font-medium text-zinc-200">Main paid channels</label>
+            <input id="channels" name="channels" required
+              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white text-sm outline-none ring-[#C9A44A] placeholder:text-zinc-600 focus:ring-2 transition"
+              placeholder="Meta, Google, TikTok..." />
+          </div>
+          <div>
+            <label for="monthlySpend" class="mb-2 block text-sm font-medium text-zinc-200">Monthly ad spend (€)</label>
+            <input id="monthlySpend" name="monthlySpend" type="number" min="1" required
+              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white text-sm outline-none ring-[#C9A44A] placeholder:text-zinc-600 focus:ring-2 transition"
+              placeholder="5000" />
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="hidden space-y-5" data-step="3">
+          <p class="flex items-center gap-2 text-xs font-semibold text-[#C9A44A]/50">
+            <span class="h-5 w-5 flex items-center justify-center rounded-full bg-[#C9A44A]/15 text-[#C9A44A] text-[10px] font-black">3</span>
+            Step 3 of 3 — Your biggest challenge
+          </p>
+          <div>
+            <label for="biggestBlocker" class="mb-2 block text-sm font-medium text-zinc-200">Biggest current blocker</label>
+            <textarea id="biggestBlocker" name="biggestBlocker" rows="4" required
+              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white text-sm outline-none ring-[#C9A44A] placeholder:text-zinc-600 focus:ring-2 transition resize-none"
+              placeholder="What is costing you the most right now?"></textarea>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-7 flex flex-wrap gap-3">
+          <button id="back-btn" type="button"
+            class="hidden rounded-lg border border-white/12 px-6 py-3 text-sm font-semibold text-zinc-300 transition hover:bg-white/5">
+            ← Back
+          </button>
+          <button id="next-btn" type="button" class="btn-gold !py-3 !px-8 !text-sm">
+            Continue →
+          </button>
+          <button id="submit-btn" type="submit" class="hidden btn-gold !py-3 !px-8 !text-sm">
+            Join the waitlist →
+          </button>
+        </div>
+
+        <!-- Messages -->
+        <p id="form-success" class="mt-5 hidden rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-300">
+          You're in. We'll be in touch with next steps soon.
+        </p>
+        <p id="form-error" class="mt-5 hidden rounded-xl border border-red-400/30 bg-red-500/10 p-4 text-sm text-red-300">
+          Something went wrong. Please try again.
+        </p>
+      </form>
+    </div>
+
   </div>
 </section>
 
 <script>
-  const form = document.querySelector("#waitlist-form");
+  const form = document.querySelector("#waitlist-form") as HTMLFormElement | null;
   if (form) {
-    const steps = Array.from(form.querySelectorAll("[data-step]"));
-    const backBtn = form.querySelector("#back-btn");
-    const nextBtn = form.querySelector("#next-btn");
-    const submitBtn = form.querySelector("#submit-btn");
-    const successMsg = form.querySelector("#form-success");
-    const errorMsg = form.querySelector("#form-error");
-    let currentStep = 0;
+    const steps      = Array.from(form.querySelectorAll("[data-step]")) as HTMLElement[];
+    const backBtn    = form.querySelector("#back-btn")    as HTMLButtonElement;
+    const nextBtn    = form.querySelector("#next-btn")    as HTMLButtonElement;
+    const submitBtn  = form.querySelector("#submit-btn")  as HTMLButtonElement;
+    const successMsg = form.querySelector("#form-success") as HTMLElement;
+    const errorMsg   = form.querySelector("#form-error")   as HTMLElement;
+    let currentStep  = 0;
 
     const updateStep = () => {
-      steps.forEach((step, index) => {
-        step.classList.toggle("hidden", index !== currentStep);
+      // Mostrar só o step atual
+      steps.forEach((s, i) => {
+        if (i === currentStep) s.classList.remove("hidden");
+        else s.classList.add("hidden");
       });
-      backBtn?.classList.toggle("hidden", currentStep === 0);
-      nextBtn?.classList.toggle("hidden", currentStep === steps.length - 1);
-      submitBtn?.classList.toggle("hidden", currentStep !== steps.length - 1);
+
+      // Back: oculto no primeiro step
+      if (currentStep === 0) backBtn.classList.add("hidden");
+      else backBtn.classList.remove("hidden");
+
+      // Último step: só Join (sem Continue)
+      if (currentStep === steps.length - 1) {
+        nextBtn.classList.add("hidden");
+        submitBtn.classList.remove("hidden");
+      } else {
+        nextBtn.classList.remove("hidden");
+        submitBtn.classList.add("hidden");
+      }
     };
 
-    const validateCurrentStep = () => {
-      const active = steps[currentStep];
-      const fields = Array.from(active.querySelectorAll("input, textarea, select"));
-      return fields.every((field) => field.reportValidity());
-    };
+    const validateCurrent = () =>
+      Array.from(steps[currentStep].querySelectorAll("input, textarea")).every(
+        (f) => (f as HTMLInputElement).reportValidity()
+      );
 
-    nextBtn?.addEventListener("click", () => {
-      if (!validateCurrentStep()) return;
-      if (currentStep < steps.length - 1) currentStep += 1;
+    nextBtn.addEventListener("click", () => {
+      if (!validateCurrent()) return;
+      if (currentStep < steps.length - 1) currentStep++;
       updateStep();
     });
 
-    backBtn?.addEventListener("click", () => {
-      if (currentStep > 0) currentStep -= 1;
+    backBtn.addEventListener("click", () => {
+      if (currentStep > 0) currentStep--;
       updateStep();
     });
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      if (!validateCurrentStep()) return;
-      errorMsg?.classList.add("hidden");
-      const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!validateCurrent()) return;
+      errorMsg.classList.add("hidden");
 
+      const fd      = new FormData(form);
+      const payload = Object.fromEntries(fd.entries()) as Record<string, string>;
+
+      // Split fullName → firstName + lastName para o tracking
+      const nameParts = (payload.fullName || '').trim().split(/\s+/);
+      const firstName = nameParts[0] || '';
+      const lastName  = nameParts.slice(1).join(' ') || '';
+
+      // GTM push client-side + coleta payload de tracking para enviar ao servidor
+      let trackingPayload: Record<string, unknown> = {};
+      if (typeof (window as any).submitMetaForm === 'function') {
+        trackingPayload = await (window as any).submitMetaForm({
+          firstName,
+          lastName,
+          email:          payload.email          || '',
+          phone:          payload.phone           || '',
+          channels:       payload.channels        || '',
+          monthlySpend:   payload.monthlySpend    || '',
+          biggestBlocker: payload.biggestBlocker  || '',
+        });
+      }
+
+      // /api/leads salva o lead E encaminha para o n8n server-side (sem CORS)
       fetch("/api/leads", {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...payload, ...trackingPayload }),
       })
-        .then((response) => {
-          if (!response.ok) throw new Error("Request failed");
-          successMsg?.classList.remove("hidden");
+        .then((r) => {
+          if (!r.ok) throw new Error();
+          successMsg.classList.remove("hidden");
           form.reset();
           currentStep = 0;
           updateStep();
         })
-        .catch(() => {
-          errorMsg?.classList.remove("hidden");
-        });
+        .catch(() => errorMsg.classList.remove("hidden"));
     });
 
     updateStep();

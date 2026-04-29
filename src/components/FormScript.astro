@@ -1,0 +1,109 @@
+---
+// Expõe window.submitMetaForm({ firstName, lastName, email, phone, ...extra })
+// Responsabilidade do client: GTM push + retornar payload de tracking para o servidor.
+// O POST para o n8n é feito pelo /api/leads (server-side → sem CORS).
+---
+
+<script is:inline>
+(function () {
+
+  // ── SHA-256 via Web Crypto API ─────────────────────────────────────
+  async function sha256(value) {
+    var normalized = (value || '').toLowerCase().trim();
+    if (!normalized) return '';
+    var encoded = new TextEncoder().encode(normalized);
+    var buffer = await crypto.subtle.digest('SHA-256', encoded);
+    return Array.from(new Uint8Array(buffer))
+      .map(function (b) { return b.toString(16).padStart(2, '0'); })
+      .join('');
+  }
+
+  function normalizePhone(phone) {
+    return (phone || '').trim().replace(/[\s\-().]/g, '').replace(/^\+/, '');
+  }
+
+  // ── Cookies ────────────────────────────────────────────────────────
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : '';
+  }
+
+  function getFbp() { return getCookie('_fbp'); }
+
+  function getFbc() {
+    var cookieFbc = getCookie('_fbc');
+    if (cookieFbc) return cookieFbc;
+    var match = window.location.search.match(/[?&]fbclid=([^&]+)/);
+    if (match) return 'fb.1.' + Date.now() + '.' + decodeURIComponent(match[1]);
+    return '';
+  }
+
+  // ── Consent ────────────────────────────────────────────────────────
+  // TODO: integrar Usercentrics quando for implementado.
+  function getMarketingConsent() {
+    // if (window.UC_UI && window.UC_UI.getServicesBaseInfo) { ... }
+    return false;
+  }
+
+  // ── UTMs ────────────────────────────────────────────────────────────
+  function getUrlParams() {
+    var params = {};
+    var search = window.location.search.substring(1);
+    if (!search) return params;
+    search.split('&').forEach(function (pair) {
+      var idx = pair.indexOf('=');
+      if (idx === -1) return;
+      params[decodeURIComponent(pair.slice(0, idx))] = decodeURIComponent(pair.slice(idx + 1));
+    });
+    return params;
+  }
+
+  // ── submitMetaForm ─────────────────────────────────────────────────
+  // 1) Computa hashes SHA-256 client-side
+  // 2) Faz GTM push (acionador meta_user_data_ready → tag FBA Lead)
+  // 3) Retorna o payload de tracking para o form incluir no POST /api/leads
+  //    → /api/leads encaminha para o n8n server-side (sem CORS)
+  window.submitMetaForm = async function (formData) {
+    var eventId = window.META_EVENT_ID || (Date.now() + '_' + Math.floor(Math.random() * 1e15));
+
+    var emHash = await sha256(formData.email);
+    var phHash = await sha256(normalizePhone(formData.phone));
+    var fnHash = await sha256(formData.firstName);
+    var lnHash = await sha256(formData.lastName);
+
+    var fbp     = getFbp();
+    var fbc     = getFbc();
+    var consent = getMarketingConsent();
+
+    // GTM push → tag FBA Lead dispara aqui (browser Pixel)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event:    'meta_user_data_ready',
+      event_id: eventId,
+      em: emHash,
+      ph: phHash,
+      fn: fnHash,
+      ln: lnHash,
+      fbp: fbp,
+      fbc: fbc,
+    });
+
+    // Retorna payload completo para o /api/leads enviar ao n8n server-side
+    return {
+      meta_event_id:         eventId,
+      meta_em:               emHash,
+      meta_ph:               phHash,
+      meta_fn:               fnHash,
+      meta_ln:               lnHash,
+      meta_fbp:              fbp,
+      meta_fbc:              fbc,
+      meta_user_agent:       navigator.userAgent,
+      meta_event_source_url: window.location.href,
+      submitted_at:          new Date().toISOString(),
+      marketing_consent:     consent,
+      url_params:            getUrlParams(),
+    };
+  };
+
+})();
+</script>
